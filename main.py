@@ -43,7 +43,7 @@ pg.init
 pg.display.init()
 screen = pg.display.set_mode((screenx, screeny))
 background = pg.Surface((screenx, screeny))
-bgimg, bgimg_rect = load_image("background.png")
+bgimg, bgimg_rect = load_image("background_b.png")
 background.blit(bgimg, bgimg_rect)
 
 trace, trace_rect = load_image(plot_png, scale=0.95)
@@ -70,7 +70,8 @@ try:
 
     logging.info("read bmp file")
     Himage = Image.open(os.path.join(picdir, 'clock_img.bmp'))
-    epd.display(epd.getbuffer(Himage))
+    Himage2 = Image.open(os.path.join(picdir, 'background_r.bmp'))
+    epd.display(epd.getbuffer(Himage), epd.getbuffer(Himage2))
     time.sleep(2)
 
     logging.info("Goto Sleep...")
