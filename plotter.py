@@ -63,7 +63,7 @@ def generate_trace(tideData):
     upper_ylim = 10
     ax.set_ylim(bottom=lower_ylim, top=upper_ylim)
     ax.set_xlim(left=xticks[0], right=xticks[4])
-    ax.vlines(tideData.iloc[x_spacing*1].name, lower_ylim, upper_ylim, colors='Red')
+    #ax.vlines(tideData.iloc[x_spacing*1].name, lower_ylim, upper_ylim, colors='Red')
 
     for max in maxima:
         if max >= x_spacing:
