@@ -12,7 +12,7 @@ if os.path.exists(libdir):
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
 import logging
-from waveshare_epd import epd7in5_V2
+from waveshare_epd import epd7in5b_V2
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
@@ -62,11 +62,11 @@ logging.basicConfig(level=logging.DEBUG)
 
 try:
     logging.info("epd7in5_V2 Demo")
-    epd = epd7in5_V2.EPD()
+    epd = epd7in5b_V2.EPD()
     
     logging.info("init and Clear")
-    epd.init()
-    epd.Clear()
+    epd.init_Fast()
+    #epd.Clear()
 
     logging.info("read bmp file")
     Himage = Image.open(os.path.join(picdir, 'clock_img.bmp'))
@@ -81,5 +81,5 @@ except IOError as e:
     
 except KeyboardInterrupt:    
     logging.info("ctrl + c:")
-    epd7in5_V2.epdconfig.module_exit(cleanup=True)
+    epd7in5b_V2.epdconfig.module_exit(cleanup=True)
     exit()
