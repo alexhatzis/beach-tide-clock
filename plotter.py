@@ -83,3 +83,5 @@ def generate_trace(tideData):
         pad_inches=0,
         transparent=True
     )
+
+    return "trace_only.png"
