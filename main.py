@@ -1,12 +1,12 @@
 from NOAA_tide_data import tides_data
 from plotter import generate_trace
-import eink_writer
 import pygame as pg
 import sys
 import os
 
 picdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))))
-libdir = os.path.join(os.path.dirname(os.path.dirname(os.path.realpath(__file__))), 'lib')
+libdir = os.path.join(os.path.dirname(os.path.realpath(__file__)), 'lib')
+print(libdir)
 if os.path.exists(libdir):
     sys.path.append(libdir)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
