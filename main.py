@@ -1,3 +1,7 @@
+import logging
+
+logging.basicConfig(level=logging.INFO)
+
 from NOAA_tide_data import tides_data
 from plotter import generate_trace
 import pygame as pg
@@ -11,7 +15,6 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
-import logging
 from waveshare_epd import epd7in5b_V2
 import time
 from PIL import Image,ImageDraw,ImageFont
@@ -34,9 +37,16 @@ def load_image(name, scale=1):
 screenx = 800
 screeny = 480
 
-# pointreyes, monterey
-sg_tides = tides_data(["9415020", "9413450"], 6, 18, 5)
-tide_levels = sg_tides.get_tide_info()
+# Fetch tide data with error handling
+try:
+    # pointreyes, monterey
+    sg_tides = tides_data(["9415020", "9413450"], 6, 18, 5)
+    tide_levels = sg_tides.get_tide_info()
+    logging.info("Successfully fetched tide data")
+except Exception as e:
+    logging.error(f"Failed to fetch tide data: {e}")
+    logging.error("Cannot proceed without tide data")
+    sys.exit(1)
 plot_png = generate_trace(tide_levels)
 
 pg.init
@@ -57,8 +67,6 @@ fullname = os.path.join(main_dir, "clock_img.bmp")
 pg.image.save(background, fullname)
 
 pg.quit()
-
-logging.basicConfig(level=logging.DEBUG)
 
 try:
     logging.info("epd7in5_V2 Demo")

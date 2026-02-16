@@ -2,6 +2,7 @@ import matplotlib.pyplot as plt
 from datetime import datetime
 from time import sleep
 import pandas as pd
+import os
 
 def find_inflections(tideData):
     trend = "none"
@@ -77,8 +78,11 @@ def generate_trace(tideData):
     fig.patch.set_alpha(0.0)
     ax.patch.set_alpha(0.0)
 
+    script_dir = os.path.dirname(os.path.abspath(__file__))
+    output_path = os.path.join(script_dir, 'trace_only.png')
+
     plt.savefig(
-        'trace_only.png',
+        output_path,
         bbox_inches='tight',
         pad_inches=0,
         transparent=True
