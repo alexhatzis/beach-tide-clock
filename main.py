@@ -15,7 +15,7 @@ if os.path.exists(libdir):
     sys.path.append(libdir)
 os.environ["SDL_VIDEODRIVER"] = "dummy"
 
-from waveshare_epd import epd7in5b_V2
+#from waveshare_epd import epd7in5b_V2
 import time
 from PIL import Image,ImageDraw,ImageFont
 import traceback
@@ -47,7 +47,7 @@ except Exception as e:
     logging.error(f"Failed to fetch tide data: {e}")
     logging.error("Cannot proceed without tide data")
     sys.exit(1)
-plot_png = generate_trace(tide_levels)
+plot_png = generate_trace(tide_levels, annotation_fontsize=16, tick_fontsize=12)
 
 pg.init
 pg.display.init()

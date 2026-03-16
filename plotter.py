@@ -25,7 +25,7 @@ def find_inflections(tideData):
     return maxima, minima
         
 
-def generate_trace(tideData):
+def generate_trace(tideData, annotation_fontsize=10, tick_fontsize=10, axis_label_fontsize=12):
     num_pts = len(tideData)
     x_spacing = int((num_pts - 1) // 4)
 
@@ -59,6 +59,7 @@ def generate_trace(tideData):
         xlabels.append(label)
     ax.set_xticks(ticks=xticks,
                    labels=xlabels)
+    ax.tick_params(axis='both', labelsize=tick_fontsize)
     
     lower_ylim = -2
     upper_ylim = 10
@@ -69,11 +70,11 @@ def generate_trace(tideData):
     for max in maxima:
         if max >= x_spacing:
             label = f'{tideData.iloc[max].name.strftime(timefmtstring)} - {tideData.iloc[max].iloc[0]:.1f}ft'
-            ax.annotate(label, (x[max], y.iloc[max].iloc[0]), color='black', xytext=(-30, 5) , textcoords='offset points')
+            ax.annotate(label, (x[max], y.iloc[max].iloc[0]), color='black', xytext=(-64, 8) , textcoords='offset points', fontsize=annotation_fontsize)
     for min in minima:
         if min >= x_spacing:
             label = f'{tideData.iloc[min].name.strftime(timefmtstring)} - {tideData.iloc[min].iloc[0]:.1f}ft'
-            ax.annotate(label, (x[min], y.iloc[min].iloc[0]), color='black', xytext=(-30, -12) , textcoords='offset points')
+            ax.annotate(label, (x[min], y.iloc[min].iloc[0]), color='black', xytext=(-64, -16) , textcoords='offset points', fontsize=annotation_fontsize)
 
     fig.patch.set_alpha(0.0)
     ax.patch.set_alpha(0.0)
